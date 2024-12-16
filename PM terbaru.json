@@ -1,0 +1,2939 @@
+[
+    {
+        "id": "21bb371aee0766f0",
+        "type": "tab",
+        "label": "PM Terbaru",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ad051ec11e7fd290",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L1-N",
+        "info": "",
+        "x": 140,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "0800f09b8c98dd66",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "f46d77be74f08c79"
+            ]
+        ]
+    },
+    {
+        "id": "f46d77be74f08c79",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L2-N",
+        "unitId": "4",
+        "data": "voltage-L1N",
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "6075fee5713d577f"
+            ]
+        ]
+    },
+    {
+        "id": "6075fee5713d577f",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "97bdad62b54397d4"
+            ],
+            [
+                "5e2d78efb4f47064"
+            ]
+        ]
+    },
+    {
+        "id": "5e2d78efb4f47064",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "ca7c0c579a1e0b9c",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "97bdad62b54397d4",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 1",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 140,
+        "wires": [
+            [
+                "2dc33a0ff78a7fbd"
+            ]
+        ]
+    },
+    {
+        "id": "2dc33a0ff78a7fbd",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 60,
+        "wires": [
+            [
+                "c7d4fac2a28e3ca3"
+            ]
+        ]
+    },
+    {
+        "id": "c7d4fac2a28e3ca3",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 2",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 60,
+        "wires": [
+            [
+                "ca7c0c579a1e0b9c",
+                "7f320d05ce6601d7"
+            ]
+        ]
+    },
+    {
+        "id": "7f320d05ce6601d7",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L1-N ",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "676387f5ea9dc991",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L2-N",
+        "info": "",
+        "x": 160,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "b4d566dce7024c78",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "90b4c88352e077f5"
+            ]
+        ]
+    },
+    {
+        "id": "90b4c88352e077f5",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L2-N",
+        "unitId": "4",
+        "data": "voltage-L2N",
+        "x": 330,
+        "y": 420,
+        "wires": [
+            [
+                "a1c3620b02c3aaee"
+            ]
+        ]
+    },
+    {
+        "id": "a1c3620b02c3aaee",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "36df9eebb533a886"
+            ],
+            [
+                "77bbbfbe1a19139a"
+            ]
+        ]
+    },
+    {
+        "id": "77bbbfbe1a19139a",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 720,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "137a1e0b0808f68a",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "36df9eebb533a886",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 3",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "a3f381320c3156a8"
+            ]
+        ]
+    },
+    {
+        "id": "a3f381320c3156a8",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "9c51048366f91f0f"
+            ]
+        ]
+    },
+    {
+        "id": "9c51048366f91f0f",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 4",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 320,
+        "wires": [
+            [
+                "137a1e0b0808f68a",
+                "5b641b64a2573b5b"
+            ]
+        ]
+    },
+    {
+        "id": "5b641b64a2573b5b",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L2-N ",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1010,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "3709ee215485dea4",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L3-N",
+        "info": "",
+        "x": 140,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c1e173a54491c9c1",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 680,
+        "wires": [
+            [
+                "ef34b0f1522dbc4f"
+            ]
+        ]
+    },
+    {
+        "id": "ef34b0f1522dbc4f",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L3-N",
+        "unitId": "4",
+        "data": "voltage-L3N",
+        "x": 310,
+        "y": 680,
+        "wires": [
+            [
+                "63dbf43f0be638fb"
+            ]
+        ]
+    },
+    {
+        "id": "63dbf43f0be638fb",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 680,
+        "wires": [
+            [
+                "6048fe291105d2da"
+            ],
+            [
+                "a5ce132043adcb55"
+            ]
+        ]
+    },
+    {
+        "id": "a5ce132043adcb55",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "acf0a4f74192319b",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "6048fe291105d2da",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 5",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 660,
+        "wires": [
+            [
+                "3073c86109edc771"
+            ]
+        ]
+    },
+    {
+        "id": "3073c86109edc771",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "5022260491038e9a"
+            ]
+        ]
+    },
+    {
+        "id": "5022260491038e9a",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 6",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 580,
+        "wires": [
+            [
+                "acf0a4f74192319b",
+                "d324e45a6edb88f3"
+            ]
+        ]
+    },
+    {
+        "id": "d324e45a6edb88f3",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L3-N ",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "bd666e2f64265600",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L1-L2",
+        "info": "",
+        "x": 160,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "5bd4940dbe3f85d7",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "0a87dcad40e1ea51"
+            ]
+        ]
+    },
+    {
+        "id": "0a87dcad40e1ea51",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L1-L2",
+        "unitId": "4",
+        "data": "voltage-L1L2",
+        "x": 340,
+        "y": 920,
+        "wires": [
+            [
+                "5cb2f4806abb7820"
+            ]
+        ]
+    },
+    {
+        "id": "5cb2f4806abb7820",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 550,
+        "y": 920,
+        "wires": [
+            [
+                "971bcfe0022770eb"
+            ],
+            [
+                "c8c5a6d8d6ecff02"
+            ]
+        ]
+    },
+    {
+        "id": "c8c5a6d8d6ecff02",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 720,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d18728c6546817bf",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "971bcfe0022770eb",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 7",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 900,
+        "wires": [
+            [
+                "93792385d6add78f"
+            ]
+        ]
+    },
+    {
+        "id": "93792385d6add78f",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 690,
+        "y": 820,
+        "wires": [
+            [
+                "52b36546f976a6f7"
+            ]
+        ]
+    },
+    {
+        "id": "52b36546f976a6f7",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 8",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 820,
+        "wires": [
+            [
+                "d18728c6546817bf",
+                "e9323c91d66a3e15"
+            ]
+        ]
+    },
+    {
+        "id": "e9323c91d66a3e15",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L1-L2 ",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1020,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "34f4a346bb44eeaa",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L2-L3",
+        "info": "",
+        "x": 140,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "b7154782575178ad",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1160,
+        "wires": [
+            [
+                "c4c0eedd11466271"
+            ]
+        ]
+    },
+    {
+        "id": "c4c0eedd11466271",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L2-L3",
+        "unitId": "4",
+        "data": "voltage-L2L3",
+        "x": 320,
+        "y": 1160,
+        "wires": [
+            [
+                "b81fed6627772f12"
+            ]
+        ]
+    },
+    {
+        "id": "b81fed6627772f12",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 1160,
+        "wires": [
+            [
+                "6381af4d6cb671d0"
+            ],
+            [
+                "b6a8511da1d21fd5"
+            ]
+        ]
+    },
+    {
+        "id": "b6a8511da1d21fd5",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "1ab7627a5d640e2d",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "6381af4d6cb671d0",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 9",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1140,
+        "wires": [
+            [
+                "3e8114163ce8b058"
+            ]
+        ]
+    },
+    {
+        "id": "3e8114163ce8b058",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 1060,
+        "wires": [
+            [
+                "e798d13464cb6889"
+            ]
+        ]
+    },
+    {
+        "id": "e798d13464cb6889",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 10",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 1060,
+        "wires": [
+            [
+                "1ab7627a5d640e2d",
+                "07f46af973475b3a"
+            ]
+        ]
+    },
+    {
+        "id": "07f46af973475b3a",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L2-L3",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1000,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "3cf183af18276df2",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE L1-L3",
+        "info": "",
+        "x": 140,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "c72f073e5dfbc452",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1420,
+        "wires": [
+            [
+                "07471ecc3034225a"
+            ]
+        ]
+    },
+    {
+        "id": "07471ecc3034225a",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Voltage L3-L1",
+        "unitId": "4",
+        "data": "voltage-L3L1",
+        "x": 320,
+        "y": 1420,
+        "wires": [
+            [
+                "33ed3ad8b3e36524"
+            ]
+        ]
+    },
+    {
+        "id": "33ed3ad8b3e36524",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 1420,
+        "wires": [
+            [
+                "4ea19e113b99c22c"
+            ],
+            [
+                "2ec8ad9a849d692a"
+            ]
+        ]
+    },
+    {
+        "id": "2ec8ad9a849d692a",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "316cf07be82a3a11",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "4ea19e113b99c22c",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 11",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1400,
+        "wires": [
+            [
+                "ee49a34d5ee42253"
+            ]
+        ]
+    },
+    {
+        "id": "ee49a34d5ee42253",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 1320,
+        "wires": [
+            [
+                "a4bf93a504547caa"
+            ]
+        ]
+    },
+    {
+        "id": "a4bf93a504547caa",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 12",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 1320,
+        "wires": [
+            [
+                "316cf07be82a3a11",
+                "5a9767e325bc36fa"
+            ]
+        ]
+    },
+    {
+        "id": "5a9767e325bc36fa",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Voltage L3-L1",
+        "label": "Volts",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1000,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "80bf45a054e85ffb",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ VOLTAGE Current L1",
+        "info": "",
+        "x": 160,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "f71d91622f01187a",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1680,
+        "wires": [
+            [
+                "0b44ce4b808db61d"
+            ]
+        ]
+    },
+    {
+        "id": "0b44ce4b808db61d",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Current L1",
+        "unitId": "4",
+        "data": "current-P1",
+        "x": 310,
+        "y": 1680,
+        "wires": [
+            [
+                "02bfe3318835d60e"
+            ]
+        ]
+    },
+    {
+        "id": "02bfe3318835d60e",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 1680,
+        "wires": [
+            [
+                "8098048f681fdb32"
+            ],
+            [
+                "219f03028968623d"
+            ]
+        ]
+    },
+    {
+        "id": "219f03028968623d",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "a621a4c4ae7bf55f",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "8098048f681fdb32",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 13",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1660,
+        "wires": [
+            [
+                "8f90aa135d259b21"
+            ]
+        ]
+    },
+    {
+        "id": "8f90aa135d259b21",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 1580,
+        "wires": [
+            [
+                "4e84bf499795962f"
+            ]
+        ]
+    },
+    {
+        "id": "4e84bf499795962f",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 14",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 1580,
+        "wires": [
+            [
+                "a621a4c4ae7bf55f",
+                "305d93566f268f18"
+            ]
+        ]
+    },
+    {
+        "id": "305d93566f268f18",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Current L1",
+        "label": "Amp",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "5a3dffb6e7a82831",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ CURRENT L2",
+        "info": "",
+        "x": 130,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "8be38c31a2add284",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1900,
+        "wires": [
+            [
+                "c68539fd4de052b1"
+            ]
+        ]
+    },
+    {
+        "id": "c68539fd4de052b1",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Current L2",
+        "unitId": "4",
+        "data": "current-P2",
+        "x": 310,
+        "y": 1900,
+        "wires": [
+            [
+                "18230601345edc0e"
+            ]
+        ]
+    },
+    {
+        "id": "18230601345edc0e",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 1900,
+        "wires": [
+            [
+                "4e4be841bd9048e9"
+            ],
+            [
+                "2d0f9492aaf879bf"
+            ]
+        ]
+    },
+    {
+        "id": "2d0f9492aaf879bf",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "dccd416b7055845a",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "4e4be841bd9048e9",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 15",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 1880,
+        "wires": [
+            [
+                "e69458232bee23ff"
+            ]
+        ]
+    },
+    {
+        "id": "e69458232bee23ff",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 1800,
+        "wires": [
+            [
+                "77cd273726f3f700"
+            ]
+        ]
+    },
+    {
+        "id": "77cd273726f3f700",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 16",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 1800,
+        "wires": [
+            [
+                "dccd416b7055845a",
+                "64de53c3529f2ba5"
+            ]
+        ]
+    },
+    {
+        "id": "64de53c3529f2ba5",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Current L2",
+        "label": "Amp",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "7b0efafc7ea726ed",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Current L3",
+        "info": "",
+        "x": 140,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "61899d206f24d047",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 2120,
+        "wires": [
+            [
+                "e09b4819cc668a3a"
+            ]
+        ]
+    },
+    {
+        "id": "e09b4819cc668a3a",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Current L3",
+        "unitId": "4",
+        "data": "current-P3",
+        "x": 330,
+        "y": 2120,
+        "wires": [
+            [
+                "8e888a368aea609a"
+            ]
+        ]
+    },
+    {
+        "id": "8e888a368aea609a",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 550,
+        "y": 2120,
+        "wires": [
+            [
+                "1ef00caa583b7ec5"
+            ],
+            [
+                "53c48c57441c2f56"
+            ]
+        ]
+    },
+    {
+        "id": "53c48c57441c2f56",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 720,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "671d12baa77096db",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "1ef00caa583b7ec5",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 17",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 2100,
+        "wires": [
+            [
+                "0aaeec92a9cea0c3"
+            ]
+        ]
+    },
+    {
+        "id": "0aaeec92a9cea0c3",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 690,
+        "y": 2020,
+        "wires": [
+            [
+                "1e714dc25fc68492"
+            ]
+        ]
+    },
+    {
+        "id": "1e714dc25fc68492",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 18",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 2020,
+        "wires": [
+            [
+                "671d12baa77096db",
+                "315386ff6ba42943"
+            ]
+        ]
+    },
+    {
+        "id": "315386ff6ba42943",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Current L3",
+        "label": "Amp",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1010,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "d8207a376a3640c6",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Activ Power",
+        "info": "",
+        "x": 130,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "4bacc4f8ab7ae8a2",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 2380,
+        "wires": [
+            [
+                "c38c6e9cca9a93e7"
+            ]
+        ]
+    },
+    {
+        "id": "c38c6e9cca9a93e7",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Activ Power",
+        "unitId": "4",
+        "data": "actPowerTot",
+        "x": 310,
+        "y": 2380,
+        "wires": [
+            [
+                "c80700f995e36bf9"
+            ]
+        ]
+    },
+    {
+        "id": "c80700f995e36bf9",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 530,
+        "y": 2380,
+        "wires": [
+            [
+                "ca30a185f3fb991f"
+            ],
+            [
+                "09210462f32e08bf"
+            ]
+        ]
+    },
+    {
+        "id": "09210462f32e08bf",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 700,
+        "y": 2440,
+        "wires": []
+    },
+    {
+        "id": "037af217c9426d5f",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 2280,
+        "wires": []
+    },
+    {
+        "id": "ca30a185f3fb991f",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 19",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 2360,
+        "wires": [
+            [
+                "a7df43333c9a5243"
+            ]
+        ]
+    },
+    {
+        "id": "a7df43333c9a5243",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 670,
+        "y": 2280,
+        "wires": [
+            [
+                "034c60d4fde5b2bd"
+            ]
+        ]
+    },
+    {
+        "id": "034c60d4fde5b2bd",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 20",
+        "func": "msg.payload=msg.payload.toFixed(4)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 2280,
+        "wires": [
+            [
+                "037af217c9426d5f",
+                "42690c04c1d7132a"
+            ]
+        ]
+    },
+    {
+        "id": "42690c04c1d7132a",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Active Power",
+        "label": "kW",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 990,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "163e4ba48b2ee620",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ DAYA REACTIVE",
+        "info": "",
+        "x": 170,
+        "y": 2820,
+        "wires": []
+    },
+    {
+        "id": "37262d6a44a693da",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 2900,
+        "wires": [
+            [
+                "6bd1c2bc06c8ae85"
+            ]
+        ]
+    },
+    {
+        "id": "6bd1c2bc06c8ae85",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Daya Reactive",
+        "unitId": "4",
+        "data": "appPowerTot",
+        "x": 340,
+        "y": 2900,
+        "wires": [
+            [
+                "8eda2d5e836c27b8"
+            ]
+        ]
+    },
+    {
+        "id": "8eda2d5e836c27b8",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 550,
+        "y": 2900,
+        "wires": [
+            [
+                "74bc69db5b3fd9fc"
+            ],
+            [
+                "48a93a4a9c2efdf8"
+            ]
+        ]
+    },
+    {
+        "id": "48a93a4a9c2efdf8",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 720,
+        "y": 2960,
+        "wires": []
+    },
+    {
+        "id": "948323994e03255f",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 2800,
+        "wires": []
+    },
+    {
+        "id": "74bc69db5b3fd9fc",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 23",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 2880,
+        "wires": [
+            [
+                "b28c8165d3b674be"
+            ]
+        ]
+    },
+    {
+        "id": "b28c8165d3b674be",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 690,
+        "y": 2800,
+        "wires": [
+            [
+                "89193fc2c2052361"
+            ]
+        ]
+    },
+    {
+        "id": "89193fc2c2052361",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 24",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 2800,
+        "wires": [
+            [
+                "948323994e03255f",
+                "e892bf8d9e36b3c6"
+            ]
+        ]
+    },
+    {
+        "id": "e892bf8d9e36b3c6",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Reactive Daya",
+        "label": "kVAr",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1020,
+        "y": 2900,
+        "wires": []
+    },
+    {
+        "id": "44f1d392d20c018e",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Frequency",
+        "info": "",
+        "x": 160,
+        "y": 3080,
+        "wires": []
+    },
+    {
+        "id": "6a34109699139458",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 3160,
+        "wires": [
+            [
+                "d57d7c00b3c93849"
+            ]
+        ]
+    },
+    {
+        "id": "d57d7c00b3c93849",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Frequency",
+        "unitId": "4",
+        "data": "frequency",
+        "x": 350,
+        "y": 3160,
+        "wires": [
+            [
+                "925f17bc78774c55"
+            ]
+        ]
+    },
+    {
+        "id": "925f17bc78774c55",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 570,
+        "y": 3160,
+        "wires": [
+            [
+                "bc419dfa57d72573"
+            ],
+            [
+                "66adc7ed0588c41c"
+            ]
+        ]
+    },
+    {
+        "id": "66adc7ed0588c41c",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 740,
+        "y": 3220,
+        "wires": []
+    },
+    {
+        "id": "c18dc23863bc2109",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 3060,
+        "wires": []
+    },
+    {
+        "id": "bc419dfa57d72573",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 25",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 3140,
+        "wires": [
+            [
+                "1a33be1cb309f127"
+            ]
+        ]
+    },
+    {
+        "id": "1a33be1cb309f127",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 710,
+        "y": 3060,
+        "wires": [
+            [
+                "19433c30bd623f65"
+            ]
+        ]
+    },
+    {
+        "id": "19433c30bd623f65",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 26",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 3060,
+        "wires": [
+            [
+                "c18dc23863bc2109",
+                "9c3c555de32cb2bc"
+            ]
+        ]
+    },
+    {
+        "id": "9c3c555de32cb2bc",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Frequency",
+        "label": "Hz",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1030,
+        "y": 3160,
+        "wires": []
+    },
+    {
+        "id": "5f6761ea0ff38614",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Power Factor",
+        "info": "",
+        "x": 110,
+        "y": 3340,
+        "wires": []
+    },
+    {
+        "id": "d4180749c4818da4",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 3420,
+        "wires": [
+            [
+                "b69ec1f1ada916aa"
+            ]
+        ]
+    },
+    {
+        "id": "b69ec1f1ada916aa",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Power Factor",
+        "unitId": "4",
+        "data": "pFactorTot",
+        "x": 270,
+        "y": 3420,
+        "wires": [
+            [
+                "99525796865a0e6d"
+            ]
+        ]
+    },
+    {
+        "id": "99525796865a0e6d",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 510,
+        "y": 3420,
+        "wires": [
+            [
+                "35f65d61b633782d"
+            ],
+            [
+                "fef5e583ed3be513"
+            ]
+        ]
+    },
+    {
+        "id": "fef5e583ed3be513",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 680,
+        "y": 3480,
+        "wires": []
+    },
+    {
+        "id": "96eb7206d8e7e6c6",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 3320,
+        "wires": []
+    },
+    {
+        "id": "35f65d61b633782d",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 27",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 3400,
+        "wires": [
+            [
+                "e4a591f2aecb42f1"
+            ]
+        ]
+    },
+    {
+        "id": "e4a591f2aecb42f1",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 650,
+        "y": 3320,
+        "wires": [
+            [
+                "e7321e0b9b011402"
+            ]
+        ]
+    },
+    {
+        "id": "e7321e0b9b011402",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 28",
+        "func": "msg.payload=msg.payload.toFixed(2)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 3320,
+        "wires": [
+            [
+                "96eb7206d8e7e6c6",
+                "d0a6d80c5e4f0c26"
+            ]
+        ]
+    },
+    {
+        "id": "d0a6d80c5e4f0c26",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Power Factor",
+        "label": "kVa",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 970,
+        "y": 3420,
+        "wires": []
+    },
+    {
+        "id": "3cbe2bd3f50788e2",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Total Energy Import",
+        "info": "",
+        "x": 190,
+        "y": 3600,
+        "wires": []
+    },
+    {
+        "id": "cd92154f79cc0ef1",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 3680,
+        "wires": [
+            [
+                "146bc94af02ee2e6"
+            ]
+        ]
+    },
+    {
+        "id": "146bc94af02ee2e6",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Total Energy Import",
+        "unitId": "4",
+        "data": "toEnergyReactImp",
+        "x": 350,
+        "y": 3680,
+        "wires": [
+            [
+                "86624e5d367c4763"
+            ]
+        ]
+    },
+    {
+        "id": "86624e5d367c4763",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 570,
+        "y": 3680,
+        "wires": [
+            [
+                "0c1fecc3923e5a39"
+            ],
+            [
+                "3c0560064d31c0da"
+            ]
+        ]
+    },
+    {
+        "id": "3c0560064d31c0da",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 740,
+        "y": 3740,
+        "wires": []
+    },
+    {
+        "id": "0e826d2479767b3f",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 3580,
+        "wires": []
+    },
+    {
+        "id": "0c1fecc3923e5a39",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 29",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 3660,
+        "wires": [
+            [
+                "6e825470faad7747"
+            ]
+        ]
+    },
+    {
+        "id": "6e825470faad7747",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 710,
+        "y": 3580,
+        "wires": [
+            [
+                "2e41b7c5a115beeb"
+            ]
+        ]
+    },
+    {
+        "id": "2e41b7c5a115beeb",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 30",
+        "func": "msg.payload=msg.payload.toFixed(4)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 3580,
+        "wires": [
+            [
+                "0e826d2479767b3f",
+                "f1208c36e8ee7f18"
+            ]
+        ]
+    },
+    {
+        "id": "f1208c36e8ee7f18",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Energy Import",
+        "label": "kWh",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1040,
+        "y": 3680,
+        "wires": []
+    },
+    {
+        "id": "f97126b01a4476f2",
+        "type": "comment",
+        "z": "21bb371aee0766f0",
+        "name": "READ Energy Export",
+        "info": "",
+        "x": 178.3333282470703,
+        "y": 3856,
+        "wires": []
+    },
+    {
+        "id": "366751d27b711ed5",
+        "type": "inject",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 138.3333282470703,
+        "y": 3936,
+        "wires": [
+            [
+                "3dc23863fad4e8d8"
+            ]
+        ]
+    },
+    {
+        "id": "3dc23863fad4e8d8",
+        "type": "pm5000",
+        "z": "21bb371aee0766f0",
+        "name": "Read Energy Export",
+        "unitId": "4",
+        "data": "toEnergyReactExp",
+        "x": 368.3333282470703,
+        "y": 3936,
+        "wires": [
+            [
+                "a70ed3d42b967747"
+            ]
+        ]
+    },
+    {
+        "id": "a70ed3d42b967747",
+        "type": "modbus-flex-getter",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "showStatusActivities": true,
+        "showErrors": true,
+        "showWarnings": true,
+        "logIOActivities": false,
+        "server": "ea09c2f8e67a37f0",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "emptyMsgOnFail": false,
+        "keepMsgProperties": false,
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "x": 578.3333282470703,
+        "y": 3936,
+        "wires": [
+            [
+                "92cd1be4eabf693b"
+            ],
+            [
+                "4a13e64531917dab"
+            ]
+        ]
+    },
+    {
+        "id": "4a13e64531917dab",
+        "type": "modbus-response",
+        "z": "21bb371aee0766f0",
+        "name": "VoltL2N",
+        "registerShowMax": 20,
+        "x": 718.3333282470703,
+        "y": 3996,
+        "wires": []
+    },
+    {
+        "id": "c2389756da3d6bba",
+        "type": "debug",
+        "z": "21bb371aee0766f0",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1018.3333282470703,
+        "y": 3836,
+        "wires": []
+    },
+    {
+        "id": "92cd1be4eabf693b",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 31",
+        "func": "var msg1={payload:(msg.payload[0]<<16)+msg.payload[1]}\nreturn msg1;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 3900,
+        "wires": [
+            [
+                "f095b831b3fa0f8e"
+            ]
+        ]
+    },
+    {
+        "id": "f095b831b3fa0f8e",
+        "type": "toFloat",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "toFixed": "",
+        "x": 678.3333282470703,
+        "y": 3836,
+        "wires": [
+            [
+                "dcf7d1e42428ba43"
+            ]
+        ]
+    },
+    {
+        "id": "dcf7d1e42428ba43",
+        "type": "function",
+        "z": "21bb371aee0766f0",
+        "name": "function 32",
+        "func": "msg.payload=msg.payload.toFixed(4)\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 868.3333282470703,
+        "y": 3836,
+        "wires": [
+            [
+                "c2389756da3d6bba",
+                "db5377cac8b6508e"
+            ]
+        ]
+    },
+    {
+        "id": "db5377cac8b6508e",
+        "type": "ui_gauge",
+        "z": "21bb371aee0766f0",
+        "name": "",
+        "group": "9eb2fce2e37061ca",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Energy Export",
+        "label": "kWh",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1028.3333282470703,
+        "y": 3936,
+        "wires": []
+    },
+    {
+        "id": "ea09c2f8e67a37f0",
+        "type": "modbus-client",
+        "name": "",
+        "clienttype": "simpleser",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "queueLogEnabled": false,
+        "failureLogEnabled": true,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "COM10",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "serialAsciiResponseStartDelimiter": "0x3A",
+        "unit_id": "4",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectOnTimeout": true,
+        "reconnectTimeout": "2000",
+        "parallelUnitIdsAllowed": true,
+        "showErrors": false,
+        "showWarnings": true,
+        "showLogs": true
+    },
+    {
+        "id": "9eb2fce2e37061ca",
+        "type": "ui_group",
+        "name": "Power Meter Schneider 5350",
+        "tab": "c9ccb9bbb743370f",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c9ccb9bbb743370f",
+        "type": "ui_tab",
+        "name": "PM Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
