@@ -1,2 +1,2 @@
-# Power-Meter-Schneider
+# Power-Meter-Schneider-Node-red
 pm5350
